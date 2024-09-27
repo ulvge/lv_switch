@@ -20,6 +20,7 @@
  
 #include "LVGL/GUI_APP/lv_mainstart.h"
 #include "lvgl.h"
+#include "./BSP/LED/led.h"
 #include <stdio.h>
 
 
@@ -55,7 +56,10 @@ static void switch_event_cb(lv_event_t *e)
             lv_obj_clear_state(switch_cool, LV_STATE_CHECKED);      /* 制暖模式已打开，关闭制冷模式 */
         }
     }
-
+    else if(target == switch_dry)                                  /* add by myself */
+    {
+        LED1_TOGGLE();
+    }
 }
 
 /**
@@ -156,7 +160,8 @@ static void lv_example_switch3(void)
     switch_dry = lv_switch_create(obj_dry);
     lv_obj_set_size(switch_dry,scr_act_height() / 6, scr_act_height() / 12 );
     lv_obj_align(switch_dry, LV_ALIGN_CENTER, 0, scr_act_height() / 16 );
-    lv_obj_add_state(switch_dry, LV_STATE_CHECKED|LV_STATE_DISABLED);
+    // lv_obj_add_state(switch_dry, LV_STATE_CHECKED|LV_STATE_DISABLED); //可以屏蔽 开关
+    lv_obj_add_event_cb(switch_dry, switch_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
 }
 
 /**
