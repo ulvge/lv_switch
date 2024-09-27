@@ -23,6 +23,10 @@
 #include "./BSP/LED/led.h"
 #include <stdio.h>
 
+#define BUTTON_WIDTH  (scr_act_height() / 6)
+#define BUTTON_HEIGHT (scr_act_height() / 10)
+
+#define BUTTON_OFFSET_Y (scr_act_height() / 20) // BUTTON_HEIGHT变大之后，BUTTON_OFFSET_Y要变小，否则会出现下拉框
 
 /* 获取当前活动屏幕的宽高 */
 #define scr_act_width() lv_obj_get_width(lv_scr_act())
@@ -108,8 +112,8 @@ static void lv_example_switch1(void)
 
     /* 制冷模式开关 */
     switch_cool = lv_switch_create(obj_cool);                                       /* 创建开关 */
-    lv_obj_set_size(switch_cool,scr_act_height() / 6, scr_act_height() / 12 );      /* 设置大小 */
-    lv_obj_align(switch_cool, LV_ALIGN_CENTER, 0, scr_act_height() / 16 );          /* 设置位置 */
+    lv_obj_set_size(switch_cool,BUTTON_WIDTH, BUTTON_HEIGHT);      /* 设置大小 */
+    lv_obj_align(switch_cool, LV_ALIGN_CENTER, 0, BUTTON_OFFSET_Y );          /* 设置位置 */
     lv_obj_add_event_cb(switch_cool, switch_event_cb, LV_EVENT_VALUE_CHANGED, NULL);/* 添加事件 */
 }
 
@@ -133,8 +137,8 @@ static void lv_example_switch2(void)
 
     /* 制暖模式开关 */
     switch_heat = lv_switch_create(obj_heat);
-    lv_obj_set_size(switch_heat,scr_act_height() / 6, scr_act_height() / 12 );
-    lv_obj_align(switch_heat, LV_ALIGN_CENTER, 0, scr_act_height() / 16 );
+    lv_obj_set_size(switch_heat,BUTTON_WIDTH, BUTTON_HEIGHT);
+    lv_obj_align(switch_heat, LV_ALIGN_CENTER, 0, BUTTON_OFFSET_Y);
     lv_obj_add_event_cb(switch_heat, switch_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
 }
 
@@ -158,8 +162,8 @@ static void lv_example_switch3(void)
 
     /* 干燥模式开关 */
     switch_dry = lv_switch_create(obj_dry);
-    lv_obj_set_size(switch_dry,scr_act_height() / 6, scr_act_height() / 12 );
-    lv_obj_align(switch_dry, LV_ALIGN_CENTER, 0, scr_act_height() / 16 );
+    lv_obj_set_size(switch_dry,BUTTON_WIDTH, BUTTON_HEIGHT);
+    lv_obj_align(switch_dry, LV_ALIGN_CENTER, 0, BUTTON_OFFSET_Y);
     // lv_obj_add_state(switch_dry, LV_STATE_CHECKED|LV_STATE_DISABLED); //可以屏蔽 开关
     lv_obj_add_event_cb(switch_dry, switch_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
 }
